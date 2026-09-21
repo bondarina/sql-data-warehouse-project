@@ -9,4 +9,6 @@ After the data is loaded into tjhe bronze layer from the source, do:
 
 4) as it may be a frequently repeatable SQL script, we can store it as a Stored procedure.
 5) add Prints to track execution, debug issues, and understand its flow.
+6) add Try... Catch - it ensures error handling, data integrity, and issue logging for easier debugging.
+7) Track ETL duration of each step. It helps to identify bottlenecks, optimize performance, monitor trends, detect issues.
 */
