@@ -1,0 +1,5 @@
+/*
+After the data is loaded into tjhe bronze layer from the source, do:
+1) take a look whether the data is in the right columns;
+2) do the COUNT(*) to know the qty of the rows in the bronze. And look this qty in the source. The the bronze it should be 1 rows less, as we don't load the header row from the source.
+*/
