@@ -1,11 +1,12 @@
 /*
-After the data is loaded into tjhe bronze layer from the source, do:
-1) take a look whether the data is in the right columns;
-2) do the COUNT(*) to know the qty of the rows in the bronze. And look this qty in the source. The the bronze it should be 1 rows less, as we don't load the header row from the source.
-
-3) As my training scheme is PostgreSQL, DBeaver UI agent, NeonDB server (cloud), I insert data into the bronze layer tables from the sources -- by tool of import in the DBeaver. Seelct the table,
+1) As my training scheme is PostgreSQL, DBeaver UI agent, NeonDB server (cloud), I insert data into the bronze layer tables from the sources -- by tool of import in the DBeaver. Select the table,
 then choose the right buttons to Import the data from the source. I chose the file to import, as the source data is stored in a file on my computer. There is an option to truncate the target table before the load.
 Do that to all tables needed.
 
-3) as it may be a frequently repeatable SQL script, we can store it as a Stored procedure.
+After the data is loaded into tjhe bronze layer from the source, do:
+2) take a look whether the data is in the right columns;
+3) do the COUNT(*) to know the qty of the rows in the bronze. And look this qty in the source. The the bronze it should be 1 rows less, as we don't load the header row from the source.
+
+4) as it may be a frequently repeatable SQL script, we can store it as a Stored procedure.
+5) add Prints to track execution, debug issues, and understand its flow.
 */
