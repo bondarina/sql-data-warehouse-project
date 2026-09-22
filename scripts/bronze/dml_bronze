@@ -1,9 +1,0 @@
-copy bronze.crm_cust_info
-  from '/Users/darina/Documents/DWH training/sql-data-warehouse-project-main/datasets/source_crm/cust_info.csv'
-  with(
-  format csv,
-  header true,
-  delimiter ','
-);
-
-  и по остальным таблицам аналогично
