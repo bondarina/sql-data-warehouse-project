@@ -1,1 +1,2 @@
-First, investigate the tables on Bronze layer. Which data is in them, which columns are there, what's the primary key
+First, investigate the tables on Bronze layer. Which data is in them, which columns are there, what's the primary key.
+Try to find the 'main' table (which contains the foreign keys (which are the primary keys we've found in the other tables)).
