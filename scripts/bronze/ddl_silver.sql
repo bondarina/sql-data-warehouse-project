@@ -1,6 +1,6 @@
 
 
-    DROP TABLE silver.crm_cust_info if exists;
+    DROP TABLE IF EXISTS silver.crm_cust_info;
 
 
 CREATE TABLE silver.crm_cust_info (
@@ -15,7 +15,7 @@ CREATE TABLE silver.crm_cust_info (
 );
 
 
-    DROP TABLE silver.crm_prd_info if exists;
+    DROP TABLE IF EXISTS silver.crm_prd_info;
 
 
 CREATE TABLE silver.crm_prd_info (
@@ -30,7 +30,7 @@ CREATE TABLE silver.crm_prd_info (
 );
 
 
-    DROP TABLE silver.crm_sales_details if exists;
+    DROP TABLE IF EXISTS silver.crm_sales_details;
 
 
 CREATE TABLE silver.crm_sales_details (
@@ -47,7 +47,7 @@ CREATE TABLE silver.crm_sales_details (
 );
 
 
-    DROP TABLE silver.erp_loc_a101 if exists;
+    DROP TABLE IF EXISTS silver.erp_loc_a101;
 
 
 CREATE TABLE silver.erp_loc_a101 (
@@ -57,7 +57,7 @@ CREATE TABLE silver.erp_loc_a101 (
 );
 
 
-    DROP TABLE silver.erp_cust_az12 if exists;
+    DROP TABLE IF EXISTS silver.erp_cust_az12;
 
 
 CREATE TABLE silver.erp_cust_az12 (
@@ -68,7 +68,7 @@ CREATE TABLE silver.erp_cust_az12 (
 );
 
 
-    DROP TABLE silver.erp_px_cat_g1v2 if exists;
+    DROP TABLE IF EXISTS silver.erp_px_cat_g1v2;
 
 
 CREATE TABLE silver.erp_px_cat_g1v2 (
