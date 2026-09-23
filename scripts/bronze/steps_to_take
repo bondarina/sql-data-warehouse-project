@@ -1,4 +1,3 @@
-/*
 1) As my training scheme is PostgreSQL, DBeaver UI agent, NeonDB server (cloud), I insert data into the bronze layer tables from the sources -- by tool of import in the DBeaver. Select the table,
 then choose the right buttons to Import the data from the source. I chose the file to import, as the source data is stored in a file on my computer. There is an option to truncate the target table before the load.
 Do that to all tables needed.
@@ -11,4 +10,9 @@ After the data is loaded into tjhe bronze layer from the source, do:
 5) add Prints to track execution, debug issues, and understand its flow.
 6) add Try... Catch - it ensures error handling, data integrity, and issue logging for easier debugging.
 7) Track ETL duration of each step. It helps to identify bottlenecks, optimize performance, monitor trends, detect issues.
-*/
+
+Read more details here:
+https://app.notion.com/p/Analysing-source-systems-3dee3b304b78801ca0a6e19034eba0fe?source=copy_link
+https://app.notion.com/p/Coding-data-ingestion-3dee3b304b7880939c0dda3801cf0da2?source=copy_link
+https://app.notion.com/p/Validating-data-completeness-schema-checks-3dee3b304b7880a58af3c79acbdb45ac?source=copy_link
+https://app.notion.com/p/Documenting-draw-data-flow-data-io-3dee3b304b7880bab266dc662c3b26af?source=copy_link
