@@ -1,2 +1,5 @@
 First, investigate the tables on Bronze layer. Which data is in them, which columns are there, what's the primary key.
 Try to find the 'main' table (which contains the foreign keys (which are the primary keys we've found in the other tables)).
+
+Read more details here https://app.notion.com/p/Analysing-explore-and-understand-data-3dee3b304b788029b3fbeb0f41186dc5?source=copy_link
+https://app.notion.com/p/Documenting-Draw-Data-Integration-draw-io-3e4e3b304b7880dd9419d8b04e133db7?source=copy_link
