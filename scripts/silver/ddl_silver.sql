@@ -15,6 +15,7 @@ CREATE TABLE silver.crm_cust_info (
 );
 
 
+
     DROP TABLE IF EXISTS silver.crm_prd_info;
 
 
@@ -32,20 +33,19 @@ dwh_create_date timestamp default current_timestamp
 )
 
 
-    DROP TABLE IF EXISTS silver.crm_sales_details;
+    drop table if exists silver.crm_sales_details;
 
-
-CREATE TABLE silver.crm_sales_details (
-    sls_ord_num  VARCHAR(50),
-    sls_prd_key  VARCHAR(50),
-    sls_cust_id  INT,
-    sls_order_dt INT,
-    sls_ship_dt  INT,
-    sls_due_dt   INT,
-    sls_sales    INT,
-    sls_quantity INT,
-    sls_price    INT,
-    dwh_create_date timestamp default current_timestamp
+create table silver.crm_sales_details(
+sls_ord_num varchar(50),
+sls_prd_key varchar(50),
+sls_cust_id int,
+sls_order_dt date,
+sls_ship_dt date,
+sls_due_dt date,
+sls_sales int,
+sls_quantity int,
+sls_price int,
+dwh_create_date timestamp default current_timestamp
 );
 
 
@@ -57,6 +57,7 @@ CREATE TABLE silver.erp_loc_a101 (
     cntry  VARCHAR(50),
     dwh_create_date timestamp default current_timestamp
 );
+
 
 
     DROP TABLE IF EXISTS silver.erp_cust_az12;
