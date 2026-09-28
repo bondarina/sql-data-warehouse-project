@@ -18,16 +18,18 @@ CREATE TABLE silver.crm_cust_info (
     DROP TABLE IF EXISTS silver.crm_prd_info;
 
 
-CREATE TABLE silver.crm_prd_info (
-    prd_id       INT,
-    prd_key      VARCHAR(50),
-    prd_nm       VARCHAR(50),
-    prd_cost     INT,
-    prd_line     VARCHAR(50),
-    prd_start_dt timestamp,
-    prd_end_dt   timestamp,
-    dwh_create_date timestamp default current_timestamp
-);
+create table silver.crm_prd_info (
+prd_id int,
+cat_id varchar(50),
+prd_key varchar(50),
+prd_key varchar(50),
+prd_nm varchar(50),
+prd_cost int,
+prd_line varchar(50),
+prd_start_dt date,
+prd_end_dt date,
+dwh_create_date timestamp default current_timestamp
+)
 
 
     DROP TABLE IF EXISTS silver.crm_sales_details;
