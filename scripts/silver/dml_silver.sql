@@ -355,4 +355,4 @@ end;
 $$;
 
 -- >>> EXECUTE THAT STORED PROCEDURE
-call.silver.load_silver();
+call silver.load_silver();
