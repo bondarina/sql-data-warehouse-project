@@ -1,14 +1,66 @@
 -- >> Inserting silver.crm_cust_info
 -- read more details here https://app.notion.com/p/Coding-data-cleansing-check-quality-of-bronze-then-transform-data-then-insert-that-data-into-sil-3dee3b304b7880a3944fd84b120aac2f?source=copy_link
 
-insert into silver.crm_cust_info (
+/*
+===============================================================================
+Stored Procedure: Load Silver Layer (Bronze -> Silver)
+===============================================================================
+Script Purpose:
+    This stored procedure loads data into the 'Silver' schema from Bronze layer tables. 
+    It performs the following actions:
+    - Truncates the Silver tables before loading data.
+    - Uses the `INSERT INTO ... (SELECT FROM...)` command to load data from Bronze tables to Silver tables.
+
+Parameters:
+    None. 
+	  This stored procedure does not accept any parameters or return any values.
+
+Usage Example:
+    CALL silver.load_silver();
+===============================================================================
+*/
+
+
+-- >>> CREATE THE STORED PROCEDURE
+create or replace
+procedure silver.load_silver ()
+language plpgsql
+as $$
+declare
+v_batch_start_time timestamptz;
+
+v_start_time timestamptz;
+
+v_duration timestamptz;
+
+begin
+	v_batch_start_time := clock_timestamp();
+
+raise notice '=====================';
+
+raise notice '>> Loading Silver layer';
+
+raise notice '=====================';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table: silver.crm_cust_info';
+
+truncate
+	table silver.crm_cust_info;
+
+raise notice '>> Inserting data into silver.crm_cust_info';
+
+insert
+	into
+	silver.crm_cust_info (
 cst_id,
-cst_key,
-cst_firstname,
-cst_lastname,
-cst_marital_status,
-cst_gndr,
-cst_create_date
+	cst_key,
+	cst_firstname,
+	cst_lastname,
+	cst_marital_status,
+	cst_gndr,
+	cst_create_date
 )
 select
 	cst_id,
@@ -34,13 +86,35 @@ from
 		cst_create_date desc) as flag_last
 	from
 		bronze.crm_cust_info
-)t where flag_last = 1;
+)t
+where
+	flag_last = 1;
 
+v_duration := extract(
+epoch from (clock_timestamp() - v_start_time)
+);
 
+raise notice '>> Step duration % seconds', 
+v_duration;
 
-insert into silver.crm_prd_info (
+raise notice '>> silver.crm_cust_info  is loaded';
+
+raise notice '=================';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table: silver.crm_prd_info';
+
+truncate
+	table silver.crm_prd_info;
+
+raise notice '>> Inserting data into silver.crm_prd_info';
+
+insert
+	into
+	silver.crm_prd_info (
     prd_id,
-    cat_id,
+	cat_id,
 	prd_key, 
 	prd_nm,
 	prd_cost,
@@ -66,8 +140,29 @@ select
 from
 	bronze.crm_prd_info;
 
+v_duration := extract(
+epoch from (clock_timestamp() - v_start_time)
+);
 
-insert into silver.crm_sales_details(
+raise notice '>> Step duration % seconds',
+v_duration;
+
+raise notice 'silver.crm_prd_info is loaded';
+
+raise notice '=================';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table: silver.crm_sales_details';
+
+truncate
+	table silver.crm_sales_details;
+
+raise notice '>> Inserting data into silver.crm_sales_details';
+
+insert
+	into
+	silver.crm_sales_details(
 sls_ord_num,
 	sls_prd_key,
 	sls_cust_id,
@@ -114,11 +209,32 @@ select
 from
 	bronze.crm_sales_details;
 
+v_duration := extract(
+epoch from (clock_timestamp() - v_start_time)
+);
 
-insert into silver.erp_cust_az12(
+raise notice '>> Step duration % seconds',
+v_duration;
+
+raise notice '>> silver.crm_sales_details is loaded';
+
+raise notice '===================';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table silver.erp_cust_az12';
+
+truncate
+	table silver.erp_cust_az12;
+
+raise notice '>> Inserting data into silver.erp_cust_az12';
+
+insert
+	into
+	silver.erp_cust_az12(
 cid,
-bdate,
-gen
+	bdate,
+	gen
 )
 select
 	case
@@ -137,11 +253,31 @@ select
 from
 	bronze.erp_cust_az12;
 
+v_duration := extract(
+epoch from (clock_timestamp() - v_start_time)
+);
 
+raise notice '>> Step duration % seconds',
+v_duration;
 
-insert into silver.erp_loc_a101(
+raise notice 'silver.erp_cust_az12';
+
+raise notice '====================';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table: silver.erp_loc_a101';
+
+truncate
+	table silver.erp_loc_a101;
+
+raise notice '>> Inserting data into silver.erp_loc_a101';
+
+insert
+	into
+	silver.erp_loc_a101(
 cid,
-cntry
+	cntry
 )
 select
 	replace(cid, '-', '') cid,
@@ -155,12 +291,33 @@ select
 from
 	bronze.erp_loc_a101;
 
+v_duration := extract(
+epoch from (clock_timestamp() - v_start_time)
+);
 
-insert into silver.erp_px_cat_g1v2 (
+raise notice '>> Step duration % seconds',
+v_duration;
+
+raise notice '>> silver.erp_loc_a101 is loaded';
+
+raise notice '=============';
+
+v_start_time := clock_timestamp();
+
+raise notice '>> Truncating table silver.erp_px_cat_g1v2';
+
+truncate
+	table silver.erp_px_cat_g1v2;
+
+raise notice '>> Inserting data into silver.erp_px_cat_g1v2';
+
+insert
+	into
+	silver.erp_px_cat_g1v2 (
 id,
-cat,
-subcat,
-maintenance
+	cat,
+	subcat,
+	maintenance
 )
 (
 	select
@@ -168,4 +325,34 @@ maintenance
 	from
 		bronze.erp_px_cat_g1v2);
 
+v_duration := extract(
+epoch from (clock_timetamp() - v_start_time)
+);
 
+raise notice '>> Step duration % seconds',
+v_duration;
+
+raise notice '>> silver.erp_px_cat_g1v2 is loaded';
+
+raise notice '=============';
+
+v_duration := extract(
+epoch from (clock_timestamp() - v_batch_start_time)
+);
+
+raise notice '>> Total duration % seconds',
+v_duration;
+
+exception
+when others then
+raise warning 'Loading failed. Code %, message: %',
+sqlstate,
+sqlerrm;
+
+raise;
+end;
+
+$$;
+
+-- >>> EXECUTE THAT STORED PROCEDURE
+call.silver.load_silver();
