@@ -38,9 +38,7 @@ from
 
 
 
-insert
-	into
-	silver.crm_prd_info (
+insert into silver.crm_prd_info (
     prd_id,
     cat_id,
 	prd_key, 
@@ -69,9 +67,7 @@ from
 	bronze.crm_prd_info;
 
 
-insert
-	into
-	silver.crm_sales_details(
+insert into silver.crm_sales_details(
 sls_ord_num,
 	sls_prd_key,
 	sls_cust_id,
@@ -119,12 +115,10 @@ from
 	bronze.crm_sales_details;
 
 
-insert
-	into
-	silver.erp_cust_az12(
+insert into silver.erp_cust_az12(
 cid,
-	bdate,
-	gen
+bdate,
+gen
 )
 select
 	case
@@ -145,11 +139,9 @@ from
 
 
 
-insert
-	into
-	silver.erp_loc_a101(
+insert into silver.erp_loc_a101(
 cid,
-	cntry
+cntry
 )
 select
 	replace(cid, '-', '') cid,
@@ -162,3 +154,18 @@ select
 	end as cntry
 from
 	bronze.erp_loc_a101;
+
+
+insert into silver.erp_px_cat_g1v2 (
+id,
+cat,
+subcat,
+maintenance
+)
+(
+	select
+		*
+	from
+		bronze.erp_px_cat_g1v2);
+
+
