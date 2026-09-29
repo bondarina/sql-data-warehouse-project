@@ -21,7 +21,6 @@ Usage Example:
 */
 
 
--- >>> CREATE THE STORED PROCEDURE
 create or replace
 procedure silver.load_silver ()
 language plpgsql
@@ -31,7 +30,7 @@ v_batch_start_time timestamptz;
 
 v_start_time timestamptz;
 
-v_duration timestamptz;
+v_duration numeric;
 
 begin
 	v_batch_start_time := clock_timestamp();
@@ -326,7 +325,7 @@ id,
 		bronze.erp_px_cat_g1v2);
 
 v_duration := extract(
-epoch from (clock_timetamp() - v_start_time)
+epoch from (clock_timestamp() - v_start_time)
 );
 
 raise notice '>> Step duration % seconds',
@@ -353,6 +352,5 @@ raise;
 end;
 
 $$;
-
 -- >>> EXECUTE THAT STORED PROCEDURE
 call silver.load_silver();
